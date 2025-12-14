@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/your-username/maven-project.git'
-            }
-        }
-
         stage('Build WAR using Maven Container') {
             steps {
                 sh '''
