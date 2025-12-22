@@ -3,7 +3,7 @@ pipeline {
 
     stages {
 
-        stage('Build WAR using Maven Container') {
+        /*stage('Build WAR using Maven Container') {
             steps {
                 sh '''
                 docker run --rm \
@@ -23,6 +23,16 @@ pipeline {
                 docker run -d -p 9090:8080 --name webapp webapp-tomcat
                 '''
             }
-        }
+        }*/
+        stage('Build & Deploy') {
+    steps {
+        sh '''
+        docker rm -f webapp || true
+        docker build -t webapp-tomcat .
+        docker run -d -p 9090:8080 --name webapp webapp-tomcat
+        '''
+    }
+}
+
     }
 }
